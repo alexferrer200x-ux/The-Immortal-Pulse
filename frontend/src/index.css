@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light Mode Variables */
+:root {
+  --bg-primary: rgba(255, 255, 255, 0.92);
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --border-color: rgba(229, 231, 235, 0.5);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  --primary-blue: #3b82f6;
+  --gold: #fbbf24;
+}
+
+/* Dark Mode Variables */
+.dark {
+  --bg-primary: rgba(11, 16, 32, 0.92);
+  --bg-card: rgba(26, 31, 46, 0.85);
+  --border-color: rgba(31, 41, 55, 0.5);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #6b7280;
+}
+
+/* Global body styles */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  color: var(--text-primary);
+  transition: background-image 0.3s ease, color 0.3s ease;
+}
+
+/* Glass-morphism Card Effect - apply to all cards */
+.glass-card, 
+.card, 
+.bg-white, 
+.dark\:bg-\[\#1A1F2E\],
+.rounded-xl.bg-white,
+.rounded-xl.dark\:bg-\[\#1A1F2E\] {
+  background-color: var(--bg-card) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+}
+
+/* Navbar glass effect */
+nav {
+  background-color: var(--bg-primary) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Input fields */
+.input-immortal {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #111827;
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.dark .input-immortal {
+  background-color: rgba(17, 24, 39, 0.9);
+  color: #ffffff;
+}
+
+.input-immortal:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Button Styles */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid #3b82f6;
+  color: #3b82f6;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+/* Gradient Text */
+.gradient-text-blue {
+  background: linear-gradient(135deg, #3b82f6, #60a5fa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-text-blue-gold {
+  background: linear-gradient(135deg, #3b82f6, #fbbf24);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Rank Badges */
+.rank-warrior { background: #6b7280; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; }
+.rank-elite { background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; }
+.rank-master { background: #2563eb; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; }
+.rank-grandmaster { background: #1d4ed8; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; }
+.rank-epic { background: #8b5cf6; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; }
+.rank-legend { background: #f59e0b; color: #0B1020; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.rank-mythic { background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; }
+.rank-glory { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0B1020; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+.rank-immortal { background: linear-gradient(135deg, #3b82f6, #f59e0b); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1); }
+::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
