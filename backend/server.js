@@ -40,12 +40,19 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(compression());
+
+// CORS configuration - Allow Netlify frontend
+const allowedOrigins = process.env.CORS_ORIGIN 
+  ? [process.env.CORS_ORIGIN, 'http://localhost:5173', 'http://localhost:5001']
+  : ['http://localhost:5173', 'http://localhost:5001'];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5001'],
+  origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('dev'));
@@ -53,6 +60,7 @@ app.use('/api', limiter);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 console.log('✅ Middleware loaded');
+console.log('CORS allowed origins:', allowedOrigins);
 
 // Routes
 app.get('/', (req, res) => {
@@ -74,18 +82,18 @@ app.use('/api/upload', uploadRoutes);
 
 console.log('✅ Routes registered');
 
-// NON-BLOCKING MongoDB (🚀 KEY FIX) - REMOVED DEPRECATED bufferMaxEntries
+// NON-BLOCKING MongoDB
 console.log('🔄 Connecting to MongoDB...');
 mongoose.connect(process.env.MONGODB_URI, {
-  serverSelectionTimeoutMS: 10000,  // 10s timeout
+  serverSelectionTimeoutMS: 10000,
   socketTimeoutMS: 45000,
-  family: 4  // IPv4 only
+  family: 4
 })
 .then(() => console.log('✅ MongoDB Connected to immortal_pulse_db'))
 .catch(err => {
   console.error('⚠️  MongoDB failed:', err.message);
   console.log('🚀 Server continues without MongoDB');
-});  // NO process.exit(1) - Server keeps running!
+});
 
 // 404 Handler
 app.use((req, res) => {
@@ -99,7 +107,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Server error' });
 });
 
-// Start Server FIRST
+// Start Server
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`\n🚀 Server running → http://localhost:${PORT}`);
