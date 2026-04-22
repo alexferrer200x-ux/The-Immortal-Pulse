@@ -108,7 +108,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`\n🚀 Server running → http://localhost:${PORT}`);
   console.log(`📱 Test → http://localhost:${PORT}/api/upload/test`);
